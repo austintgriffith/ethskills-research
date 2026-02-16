@@ -4,11 +4,12 @@
 
 ## The Core Question
 
-For every piece of content:
+For every piece of content, ask two questions:
 
-> "Would a stock LLM get this wrong?"
+> 1. "Would a stock LLM get this wrong?"
+> 2. "Does the human need the agent to teach them this?"
 
-If no → cut it. You're wasting context tokens on something the agent already knows.
+If both are no → cut it. But if the agent needs to teach the human something accurately — like why Ethereum matters, what gas actually costs, or how security patterns work — that content earns its place even if the LLM "knows" it. The agent is a teacher, and teachers need good material.
 
 ## The Process
 
@@ -19,8 +20,9 @@ Go through each item in the proposed content and sort it into three buckets:
 | Bucket | Meaning | Action |
 |--------|---------|--------|
 | 🔴 **LLM blind spot** | Stock LLMs consistently get this wrong, even when asked to do it well | **KEEP** — this is the whole point of ethskills |
+| 🟣 **Human needs teaching** | The LLM knows it, but the human needs to learn it from the agent | **KEEP** — the agent is a teacher and needs good material |
 | 🟡 **LLM knows but skips** | The LLM knows the concept but won't do it unless explicitly told | **COMPRESS** to one line or a checklist item |
-| 🟢 **LLM does this naturally** | Any competent model does this unprompted | **CUT** — wasting context tokens |
+| 🟢 **LLM does this naturally** | Any competent model does this unprompted AND human doesn't need teaching | **CUT** — wasting context tokens |
 
 ### Step 2: Run a Baseline Test
 
@@ -110,5 +112,5 @@ Original PR: 205-line QA pre-ship audit checklist.
 
 - **Don't trust your intuition alone.** "I think agents get this wrong" is not evidence. Run the test.
 - **Don't ask leading questions.** "Do you know to use absolute URLs for OG images?" will get a "yes." Ask the LLM to build something and see if it actually does it.
-- **Don't keep content because it's correct.** Correct isn't the bar. The bar is: does the LLM need to be told this? A lot of correct information is already in training data.
+- **Don't keep content just because it's correct.** Correct isn't the bar. The bar is: does the LLM need to be told this, OR does the human need to learn it from the agent? A lot of correct information is already in training data and doesn't need teaching.
 - **Don't skip the test because it takes time.** A 90-second baseline test saved us from shipping 110 lines of content that would have diluted the 95 lines that actually matter.
